@@ -4,5 +4,5 @@ namespace App\Services\Interfaces;
 
 interface CategoryServiceInterface extends BaseServiceInterface
 {
-    public function getAllDescendantsAndSelf(int $id);
+    public function getAllCategoriesWithDescendants();
 }

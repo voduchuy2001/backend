@@ -35,12 +35,12 @@ class SocialiteService implements SocialiteServiceInterface
 
     public function callback(string $provider): string
     {
-        $socialAccount = Socialite::driver($provider)->stateless()->user();
+        $socialAccount = Socialite::driver($provider)
+            ->stateless()
+            ->user();
 
         if (!$socialAccount) {
-            return response()->json([
-                'message' => 'Fail to login',
-            ], 422);
+            return 'Failed to authenticate with ' . $provider;
         }
 
         $user = $this->userRepository->firstOrCreate($socialAccount->getEmail(), [

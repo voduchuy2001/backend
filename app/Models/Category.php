@@ -25,14 +25,14 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function getAllDescendantsAndSelf()
+    public function getAllCategoriesWithDescendants()
     {
         $descendants = collect([$this]);
 
         $children = $this->children;
 
         foreach ($children as $child) {
-            $descendants = $descendants->concat($child->getAllDescendantsAndSelf());
+            $descendants = $descendants->concat($child->getAllCategoriesWithDescendants());
             $descendants = $descendants->reject(function ($item) use ($child) {
                 return $item->id === $child->id;
             });

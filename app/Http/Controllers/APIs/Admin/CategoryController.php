@@ -20,7 +20,7 @@ class CategoryController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $categories = $this->categoryService->paginate();
+            $categories = $this->categoryService->getAllCategoriesWithDescendants();
             return $this->withSuccess($categories);
         } catch (Exception $exception) {
             return $this->withError($exception->getMessage());
@@ -54,16 +54,6 @@ class CategoryController extends BaseController
         try {
             $category = $this->categoryService->delete($id);
             return $this->withSuccess($category);
-        } catch (Exception $exception) {
-            return $this->withError($exception->getMessage());
-        }
-    }
-
-    public function getAllDescendantsAndSelf(int $id): JsonResponse
-    {
-        try {
-            $allDescendantsAndSelf = $this->categoryService->getAllDescendantsAndSelf($id);
-            return $this->withSuccess($allDescendantsAndSelf);
         } catch (Exception $exception) {
             return $this->withError($exception->getMessage());
         }

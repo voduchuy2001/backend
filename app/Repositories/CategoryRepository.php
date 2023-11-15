@@ -7,19 +7,20 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
+    protected Category $category;
+
     public function __construct(Category $category)
     {
         parent::__construct($category);
+        $this->category = $category;
     }
-    public function getAllDescendantsAndSelf($id)
+
+    public function getAllCategoriesWithDescendants()
     {
-        $category = $this->findById($id);
-
-        if ($category) {
-            return $category->getAllDescendantsAndSelf();
-        }
-
-        return null;
+        return $this->category->whereNull('parent_id')
+            ->get()
+            ->flatMap(function ($category) {
+                return $category->getAllCategoriesWithDescendants();
+            });
     }
-
 }

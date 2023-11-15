@@ -15,8 +15,8 @@ class CategoryService extends BaseService implements CategoryServiceInterface
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getAllDescendantsAndSelf($id)
+    public function getAllCategoriesWithDescendants()
     {
-        return $this->categoryRepository->getAllDescendantsAndSelf($id);
+        return $this->categoryRepository->getAllCategoriesWithDescendants();
     }
 }
