@@ -26,12 +26,10 @@ class BaseController extends Controller
     public function withError(
         $message = 'Error',
         $statusCode = Response::HTTP_BAD_REQUEST,
-        $exceptionMessage = null
     ): JsonResponse {
         $response = [
             'success' => false,
             'message' => $message,
-            'exception_message' => $exceptionMessage,
         ];
 
         return response()

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\APIs;
+namespace App\Http\Controllers\APIs\Auth;
 
+use App\Http\Controllers\APIs\BaseController;
 use App\Services\Interfaces\SocialiteServiceInterface as SocialiteService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -21,9 +22,7 @@ class SocialiteController extends BaseController
             $urlRedirect = $this->socialiteService
                 ->redirect($provider);
 
-            return $this->withSuccess([
-                'urlRedirect' => $urlRedirect,
-            ]);
+            return $this->withSuccess($urlRedirect);
         } catch (Exception $exception) {
             return $this->withError($exception->getMessage());
         }
