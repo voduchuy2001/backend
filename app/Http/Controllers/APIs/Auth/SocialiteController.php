@@ -6,6 +6,7 @@ use App\Http\Controllers\APIs\BaseController;
 use App\Services\Interfaces\SocialiteServiceInterface as SocialiteService;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class SocialiteController extends BaseController
 {
@@ -33,6 +34,16 @@ class SocialiteController extends BaseController
         try {
             $data = $this->socialiteService->callback($provider);
             return $this->withSuccess($data);
+        } catch (Exception $exception) {
+            return $this->withError($exception->getMessage());
+        }
+    }
+
+    public function authUser(Request $request): JsonResponse
+    {
+        try {
+            $user = $request->user();
+            return $this->withSuccess($user);
         } catch (Exception $exception) {
             return $this->withError($exception->getMessage());
         }

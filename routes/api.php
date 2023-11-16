@@ -25,3 +25,7 @@ Route::group(['middleware' => ['auth:sanctum', 'is_admin'], 'prefix' => 'admin']
     Route::delete('{id}/delete-category', [CategoryController::class, 'delete'])->name('category.delete');
     Route::get('{id}/get-all-descendants-and-self-category', [CategoryController::class, 'getAllDescendantsAndSelf'])->name('category.get-all-descendants-and-self');
 });
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('auth-user', [SocialiteController::class, 'authUser'])->name('socialite.auth-user');
+});
