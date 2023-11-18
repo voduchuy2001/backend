@@ -38,7 +38,7 @@ class CategoryController extends BaseController
         }
     }
 
-    public function update(CategoryRequest $request, int $id): JsonResponse
+    public function update(CategoryRequest $request, string|int $id): JsonResponse
     {
         try {
             $validatedData = $request->validated();
@@ -49,7 +49,7 @@ class CategoryController extends BaseController
         }
     }
 
-    public function delete(int $id): JsonResponse
+    public function delete(string|int $id): JsonResponse
     {
         try {
             $category = $this->categoryService->delete($id);

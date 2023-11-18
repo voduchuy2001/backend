@@ -12,7 +12,7 @@ class SocialiteRepository extends BaseRepository implements SocialiteRepositoryI
         parent::__construct($socialAccount);
     }
 
-    public function firstOrCreate(string $providerId, string $provider, int $userId)
+    public function firstOrCreate(string $providerId, string $provider, string|int $userId)
     {
         $socialAccount = SocialAccount::where(function ($query) use ($providerId, $userId) {
             $query->where('provider_id', $providerId)

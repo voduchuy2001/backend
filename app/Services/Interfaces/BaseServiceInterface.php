@@ -5,10 +5,10 @@ namespace App\Services\Interfaces;
 interface BaseServiceInterface
 {
     public function getAll(array $relations);
-    public function getById(int $id);
+    public function getById(string|int $id);
     public function create(array $payload);
-    public function update(int $id, array $payload);
-    public function delete(int $id);
+    public function update(string|int $id, array $payload);
+    public function delete(string|int $id);
     public function paginate(
         array $columns = ['*'],
         array $conditions = [],
